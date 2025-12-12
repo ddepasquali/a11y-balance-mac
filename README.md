@@ -6,7 +6,7 @@ macOS utility that sets and keeps the default output device balance at a fixed v
 - Tested only with AirPods Pro 2.
 - Does not work on Mac internal speakers (the CoreAudio balance property is not exposed); other devices not verified.
 - Balance is hardcoded in the source (`targetBalance` currently 0.25); change it and rebuild if you need a different value.
-- Prebuilt 1.0 included: `Release/a11y-balance-mac-1.0-macos-arm64.zip` (Apple Silicon only; on Intel, rebuild from source).
+- Prebuilt 1.0 included: `Release/a11y-balance-mac-1.0-macos-arm64.zip` (Apple Silicon only; on Intel, rebuild from source). Double-clicking the binary runs it only for the current session; use the plist/launchctl steps below for autostart at login.
 
 ## Requirements
 - macOS 13+
@@ -36,11 +36,12 @@ What it does:
    chmod +x "$DEST_BIN"
    sed "s#__BINARY_PATH__#$DEST_BIN#g; s#__BALANCE_VALUE__#$BALANCE#g" \
      Release/a11y-balance-mac-1.0/com.a11y.balance.daemon.plist.example \
-     > "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist"
+    > "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist"
    launchctl unload "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist" 2>/dev/null || true
    launchctl load "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist"
    ```
 If you are on Intel or the binary does not start, build from source.
+Note: double-clicking the binary only runs it for the current session; to start at login, load the plist via `launchctl` as above.
 
 ## Change the default balance
 1) Edit `Sources/A11yBalance/main.swift`, set `targetBalance` (0.0 = full left, 0.5 = center, 1.0 = full right).  
