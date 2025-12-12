@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:a11y-balance-mac}",
+            "name": "Debug A11yBalance",
+            "target": "A11yBalance",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug A11yBalance"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:a11y-balance-mac}",
+            "name": "Release A11yBalance",
+            "target": "A11yBalance",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release A11yBalance"
+        }
+    ]
+}

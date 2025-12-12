@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.a11y.balance.daemon</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <!-- Path al binario installato -->
+      <string>__BINARY_PATH__</string>
+
+      <!-- Bilanciamento (0.0–1.0) -->
+      <string>--balance</string>
+      <string>__BALANCE_VALUE__</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+  </dict>
+</plist>
