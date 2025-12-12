@@ -1,33 +1,33 @@
 # a11y-balance-mac
 
-Utility macOS che imposta e mantiene il bilanciamento audio del dispositivo di output di default su un valore prefissato. Nasce per esigenze di accessibilità (ipoacusia monolaterale, apparecchi acustici, cuffie con canale sbilanciato): a ogni login e a ogni cambio di dispositivo di output il bilanciamento viene riapplicato automaticamente.
+macOS utility that sets and keeps the default output device balance at a fixed value. Built for accessibility scenarios (unilateral hearing loss, hearing aids, unbalanced headphones): on every login and every default output-device change, the balance is re-applied automatically.
 
-## Stato e limiti
-- Testato solo con AirPods Pro 2.
-- Non funziona sugli speaker interni del Mac (la property CoreAudio non è esposta); altri device non sono stati verificati.
-- Il bilanciamento è fisso nel codice (`targetBalance` è attualmente 0.25); per cambiarlo va ricompilato il binario.
-- Release 1.0 precompilata inclusa: `Release/a11y-balance-mac-1.0-macos-arm64.zip` (solo Apple Silicon; su Intel va ricompilato).
+## Status and limits
+- Tested only with AirPods Pro 2.
+- Does not work on Mac internal speakers (the CoreAudio balance property is not exposed); other devices not verified.
+- Balance is hardcoded in the source (`targetBalance` currently 0.25); change it and rebuild if you need a different value.
+- Prebuilt 1.0 included: `Release/a11y-balance-mac-1.0-macos-arm64.zip` (Apple Silicon only; on Intel, rebuild from source).
 
-## Requisiti
+## Requirements
 - macOS 13+
-- Xcode toolchain / Swift 5.9+ (solo se compili dai sorgenti)
-- Permessi per installare un LaunchAgent in `~/Library/LaunchAgents`.
+- Xcode toolchain / Swift 5.9+ (only if building from source)
+- Permission to install a LaunchAgent in `~/Library/LaunchAgents`.
 
-## Installazione (build da sorgente)
+## Install (from source)
 ```bash
 ./Scripts/install.sh
 ```
-Cosa fa:
-- Compila il binario in release.
-- Copia il binario in `~/.local/bin/a11y-balance`.
-- Genera `~/Library/LaunchAgents/com.a11y.balance.daemon.plist` (usando `LaunchAgent/com.a11y.balance.daemon.plist.example`) e lo carica con `launchctl load`, così parte ad ogni login.
+What it does:
+- Builds the binary in release.
+- Copies the binary to `~/.local/bin/a11y-balance`.
+- Generates `~/Library/LaunchAgents/com.a11y.balance.daemon.plist` (from `LaunchAgent/com.a11y.balance.daemon.plist.example`) and loads it with `launchctl load` so it starts at login.
 
-## Installazione dalla release 1.0 (precompilata, Apple Silicon)
-1) Estrai lo zip (da root repo):  
+## Install from release 1.0 (prebuilt, Apple Silicon)
+1) Unzip (from repo root):  
    ```bash
    unzip Release/a11y-balance-mac-1.0-macos-arm64.zip -d Release
    ```
-2) Installa il binario e crea il plist (sostituisci il valore di `BALANCE` se serve), sempre dal root del repo:  
+2) Install binary and create the plist (adjust `BALANCE` only if you also change source and rebuild), from repo root:  
    ```bash
    DEST_BIN="$HOME/.local/bin/a11y-balance"
    BALANCE=0.25  # 0.0=left, 0.5=center, 1.0=right
@@ -40,32 +40,32 @@ Cosa fa:
    launchctl unload "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist" 2>/dev/null || true
    launchctl load "$HOME/Library/LaunchAgents/com.a11y.balance.daemon.plist"
    ```
-Se sei su Intel o se il binario non parte, usa la compilazione da sorgente.
+If you are on Intel or the binary does not start, build from source.
 
-## Cambiare il bilanciamento di default
-1) Modifica `Sources/A11yBalance/main.swift` cambiando `targetBalance` (0.0 = tutto a sinistra, 0.5 = centro, 1.0 = tutto a destra).  
-2) Ricompila/reinstalla con `./Scripts/install.sh`.
+## Change the default balance
+1) Edit `Sources/A11yBalance/main.swift`, set `targetBalance` (0.0 = full left, 0.5 = center, 1.0 = full right).  
+2) Rebuild/reinstall with `./Scripts/install.sh`.
 
-## Disinstallazione
+## Uninstall
 ```bash
 ./Scripts/uninstall.sh
 ```
-Rimuove il LaunchAgent e il binario da `~/.local/bin/a11y-balance`.
+Removes the LaunchAgent and the binary from `~/.local/bin/a11y-balance`.
 
-## Uso manuale
+## Manual run
 ```bash
 swift build -c release
 ./.build/release/A11yBalance
 ```
-Lascia il processo in esecuzione per avere il bilanciamento ripristinato anche quando cambi dispositivo di output di default.
+Leave the process running to keep balance reapplied when the default output device changes.
 
-## Creare una release 1.0 precompilata
-1) Costruisci in release: `swift build -c release`  
-2) Prepara una cartella per l’output: `mkdir -p Release/a11y-balance-mac-1.0`  
-3) Copia il binario e (opzionale) il plist di esempio:  
+## Create a prebuilt 1.0 release
+1) Build in release: `swift build -c release`  
+2) Prepare an output folder: `mkdir -p Release/a11y-balance-mac-1.0`  
+3) Copy the binary and (optional) plist example:  
    ```bash
    cp .build/release/A11yBalance Release/a11y-balance-mac-1.0/a11y-balance
    cp LaunchAgent/com.a11y.balance.daemon.plist.example Release/a11y-balance-mac-1.0/
    ```  
-4) Crea lo zip: `cd Release && zip -r a11y-balance-mac-1.0-macos-arm64.zip a11y-balance-mac-1.0`  
-Nota: il binario risultante è per Apple Silicon; su Intel va ricompilato sul target.
+4) Create the zip: `cd Release && zip -r a11y-balance-mac-1.0-macos-arm64.zip a11y-balance-mac-1.0`  
+Note: the binary is for Apple Silicon; on Intel rebuild on-target.
