@@ -2,11 +2,21 @@ import Foundation
 import CoreAudio
 import AudioToolbox
 
-// Bilanciamento fisso scelto dall'utente
 // 0.0 = full left, 0.5 = center, 1.0 = full right
-let targetBalance: Float32 = 0.25
+let defaultBalance: Float32 = 0.25
 
-// MARK: - Helpers CoreAudio
+func parseBalance(from args: [String]) -> Float32 {
+    if let idx = args.firstIndex(of: "--balance"),
+       idx + 1 < args.count,
+       let value = Float32(args[idx + 1]),
+       value >= 0.0, value <= 1.0 {
+        return value
+    }
+    return defaultBalance
+}
+
+// Valore effettivo usato dal demone
+let targetBalance: Float32 = parseBalance(from: CommandLine.arguments)
 
 func getDefaultOutputDevice() -> AudioDeviceID? {
     var deviceID = AudioDeviceID(0)

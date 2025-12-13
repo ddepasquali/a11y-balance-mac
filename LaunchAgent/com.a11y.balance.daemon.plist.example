@@ -10,7 +10,7 @@
       <!-- Path al binario installato -->
       <string>__BINARY_PATH__</string>
 
-      <!-- Bilanciamento (0.0–1.0) -->
+      <!-- Bilanciamento (0.0–1.0) passato al demone -->
       <string>--balance</string>
       <string>__BALANCE_VALUE__</string>
     </array>
