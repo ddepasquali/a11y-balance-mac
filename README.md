@@ -1,6 +1,6 @@
 # a11y-balance-daemon
 
-macOS utility that sets and keeps the default output device balance at a fixed value. Built for accessibility scenarios (unilateral hearing loss, hearing aids, unbalanced headphones): on every login and every default output-device change, the balance is re-applied automatically.
+macOS daemon that sets and keeps the default output device balance at a fixed value. Built for accessibility scenarios (unilateral hearing loss, hearing aids, unbalanced headphones): on every login and every default output-device change, the balance is re-applied automatically.
 
 ## Status and limits
 - Tested only with AirPods Pro 2.
