@@ -2,7 +2,7 @@
 
 macOS daemon that sets and keeps the default output device balance at a fixed value. Built for accessibility scenarios (unilateral hearing loss, hearing aids, unbalanced headphones): on every login and every default output-device change, the balance is re-applied automatically.
 
-> v2.0.0 (current, untagged): CLI/LaunchAgent flow with configurable balance, ready to be embedded or shipped by third-party apps or installers.
+> v2.0.0 (current): CLI/LaunchAgent flow with configurable balance, ready to be embedded or shipped by third-party apps or installers.
 > This README describes the current v2.0.0 flow; legacy v1.0.0 prebuilt instructions are kept in a separate section below.
 
 ## Status and limits
@@ -18,9 +18,9 @@ macOS daemon that sets and keeps the default output device balance at a fixed va
 
 ## Versions
 - `v1.0.0` - first public build, balance compiled to 0.25; Apple Silicon prebuilt under `Release/a11y-balance-mac-1.0-macos-arm64.zip`. Changing the balance requires editing the source and rebuilding.
-- `v2.0.0` (current, untagged) - CLI `--balance` support and templated LaunchAgent; third-party apps/installers can embed the daemon and preconfigure balance without touching the source. Install via `./Scripts/install.sh` (optionally `BALANCE=0.35 ./Scripts/install.sh`) to set the persisted balance; no new prebuilt released yet.
+- `v2.0.0` - CLI `--balance` support and templated LaunchAgent; third-party apps/installers can embed the daemon and preconfigure balance without touching the source. Install via `./Scripts/install.sh` (optionally `BALANCE=0.35 ./Scripts/install.sh`) to set the persisted balance; no new prebuilt released yet.
 
-## Install v2.0.0 (current, from source)
+## Install v2.0.0
 Default balance is 0.25. Override it without rebuilding by passing `BALANCE`:
 ```bash
 ./Scripts/install.sh                  # installs with balance=0.25
