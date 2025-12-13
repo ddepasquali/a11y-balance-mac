@@ -108,15 +108,9 @@ MSc's student in *Interaction & Experience Design*
 BSc in *Information and Communications Technologies*
 
 ## License
-This project is released under the [MIT License](https://mit-license.org).
-## License
-
 This project’s **source code** is released under the [MIT License](https://mit-license.org).
 
 ### Binary distribution and commercial use
-
 The source code in this repository is released under the MIT License and can be used under those terms.
-
 The prebuilt binaries for this project (for example the `a11y-balance` executable, `.zip`, `.pkg` or other archives published under GitHub Releases) are provided for **free personal and research use only**.
-
 Any resale, paywalled redistribution, bundling into paid app stores, or inclusion of these binaries in a commercial product is **not permitted** without my explicit written permission.
