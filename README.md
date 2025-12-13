@@ -70,3 +70,11 @@ Leave the process running to keep balance reapplied when the default output devi
    ```  
 4) Create the zip: `cd Release && zip -r a11y-balance-mac-1.0-macos-arm64.zip a11y-balance-mac-1.0`  
 Note: the binary is for Apple Silicon; on Intel rebuild on-target.
+
+## Author
+Domenico De Pasquali <br>
+MSc's student in *Interaction & Experience Design*  
+BSc in *Information and Communications Technologies*
+
+## License
+This project is released under the [MIT License](https://mit-license.org).
